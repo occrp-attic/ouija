@@ -14,19 +14,19 @@ ouija.config(['$routeProvider', '$analyticsProvider', '$compileProvider',
     templateUrl: 'tables/list.html',
     controller: 'TableController',
     resolve: {
-      bind: loadTablesList
+      bind: loadTables
     }
   });
-
 
   $routeProvider.when('/tables/:id', {
     templateUrl: 'tables/view.html',
     controller: 'TableController',
     resolve: {
-      bind: loadTableBind
+      bind: loadTables
     }
   });
 
+/*
   $routeProvider.when('/queries/', {
     templateUrl: 'queries/list.html',
     controller: 'QueryController',
@@ -44,6 +44,7 @@ ouija.config(['$routeProvider', '$analyticsProvider', '$compileProvider',
       collection: loadQueryBind,
     }
   });
+*/
 
   $routeProvider.otherwise({
     redirectTo: '/'

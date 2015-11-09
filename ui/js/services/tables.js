@@ -1,5 +1,5 @@
 
-ouija.factory('tables', ['$route', '$location', '$q', '$http', '$analytics',
+ouija.factory('tablesService', ['$route', '$location', '$q', '$http', '$analytics',
     function($route, $location, $q, $http, $analytics) {
   var query = {};
 
@@ -48,3 +48,7 @@ ouija.factory('tables', ['$route', '$location', '$q', '$http', '$analytics',
   };
 
 }]);
+
+var loadTables = ['tablesService', function(tablesService) {
+  return tablesService.get();
+}];
