@@ -86,24 +86,10 @@
 
   {% assets filters="uglifyjs", output="build/app.js",
       "js/app.js",
-      "js/services/metadata.js",
-      "js/services/query.js",
-      "js/services/schema.js",
+      "js/services/table.js",
       "js/services/session.js",
-      "js/directives/permissions_edit.js",
-      "js/directives/bind_value.js",
-      "js/directives/entity_icon.js",
-      "js/directives/entity_table.js",
-      "js/directives/entity_table_column.js",
-      "js/directives/entity_address.js",
-      "js/directives/collection_add.js",
-      "js/directives/search_facet.js",
       "js/controllers/app.js",
-      "js/controllers/home.js",
-      "js/controllers/search.js",
-      "js/controllers/entities.js",
-      "js/controllers/collections.js",
-      "js/filters.js"
+      "js/controllers/tables.js"
   %}
     <script src='{{ ASSET_URL }}'></script>
   {% endassets %}
