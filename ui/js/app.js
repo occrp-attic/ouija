@@ -12,8 +12,7 @@ ouija.config(['$routeProvider', '$analyticsProvider', '$compileProvider',
 
   $routeProvider.when('/tables/', {
     templateUrl: 'tables/list.html',
-    controller: 'EntityController',
-    reloadOnSearch: false,
+    controller: 'TableController',
     resolve: {
       bind: loadTablesList
     }
@@ -22,8 +21,7 @@ ouija.config(['$routeProvider', '$analyticsProvider', '$compileProvider',
 
   $routeProvider.when('/tables/:id', {
     templateUrl: 'tables/view.html',
-    controller: 'EntityController',
-    reloadOnSearch: false,
+    controller: 'TableController',
     resolve: {
       bind: loadTableBind
     }
@@ -31,7 +29,7 @@ ouija.config(['$routeProvider', '$analyticsProvider', '$compileProvider',
 
   $routeProvider.when('/queries/', {
     templateUrl: 'queries/list.html',
-    controller: 'CollectionController',
+    controller: 'QueryController',
     reloadOnSearch: false,
     resolve: {
       collection: loadQueryList,
@@ -40,7 +38,7 @@ ouija.config(['$routeProvider', '$analyticsProvider', '$compileProvider',
 
   $routeProvider.when('/queries/:id', {
     templateUrl: 'queries/view.html',
-    controller: 'CollectionController',
+    controller: 'QueryController',
     reloadOnSearch: false,
     resolve: {
       collection: loadQueryBind,
