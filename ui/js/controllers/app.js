@@ -1,5 +1,5 @@
 
-spindle.controller('AppController', ['$scope', '$rootScope', '$http', '$location', 'query', 'sessionService',
+ouija.controller('AppController', ['$scope', '$rootScope', '$http', '$location', 'query', 'sessionService',
   function($scope, $rootScope, $http, $location, query, sessionService) {
 
   $scope.query = query;
