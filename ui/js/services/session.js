@@ -1,5 +1,5 @@
 
-spindle.factory('sessionService', ['$http', '$q', function($http, $q) {
+ouija.factory('sessionService', ['$http', '$q', function($http, $q) {
   var dfd = $q.defer(),
       dt = new Date(),
       config = {cache: false, params: {'_': dt.getTime()}};

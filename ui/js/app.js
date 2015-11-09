@@ -1,7 +1,7 @@
 var ouija = angular.module('ouija', ['ngRoute', 'ngAnimate',
   'ui.bootstrap', 'angulartics', 'angulartics.piwik', 'infinite-scroll']);
 
-spindle.config(['$routeProvider', '$analyticsProvider', '$compileProvider',
+ouija.config(['$routeProvider', '$analyticsProvider', '$compileProvider',
     function($routeProvider, $analyticsProvider, $compileProvider) {
 
   $routeProvider.when('/', {

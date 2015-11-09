@@ -16,7 +16,7 @@ var loadSummary = ['$http', '$q', function($http, $q) {
 }];
 
 
-spindle.controller('HomeController', ['$scope', '$http', '$location', '$uibModal', 'summary', 'collections',
+ouija.controller('HomeController', ['$scope', '$http', '$location', '$uibModal', 'summary', 'collections',
     function($scope, $http, $location, $uibModal, summary, collections) {
   $scope.collections = collections;
   $scope.summary = summary;

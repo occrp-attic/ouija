@@ -1,5 +1,5 @@
 
-spindle.directive('ouijaTable', [function() {
+ouija.directive('ouijaTable', [function() {
   return {
     restrict: 'E',
     scope: {
