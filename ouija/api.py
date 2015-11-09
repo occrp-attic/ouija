@@ -26,7 +26,7 @@ def table_data(table, detailed=True):
         'rows_uri': url_for('base.tables_rows', name=table.name),
         'columns_num': len(table.columns)
     }
-    if detailed or True:
+    if detailed:
         data['columns'] = []
         for column in table.columns:
             data['columns'].append({
@@ -43,8 +43,8 @@ def tables_index():
     for table in metadata.tables.values():
         tables.append(table_data(table, detailed=False))
     return jsonify({
-        'tables': tables,
-        'table_count': len(tables)
+        'results': tables,
+        'total': len(tables)
     })
 
 
