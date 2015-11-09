@@ -16,7 +16,7 @@
     <link href='{{ ASSET_URL }}' rel='stylesheet' type='text/css'>
   {% endassets %}
 
-  <link rel="shortcut icon" href="../img/occrp-logo-bg.png">
+  <link rel="shortcut icon" href="/static/img/occrp-logo-bg.png">
 </head>
 <body ng-controller="AppController as app">
   <nav class="navbar navbar-default" id="topnav">
@@ -86,10 +86,10 @@
 
   {% assets filters="uglifyjs", output="build/app.js",
       "js/app.js",
-      "js/services/table.js",
+      "js/services/tables.js",
       "js/services/session.js",
       "js/controllers/app.js",
-      "js/controllers/tables.js"
+      "js/controllers/table.js"
   %}
     <script src='{{ ASSET_URL }}'></script>
   {% endassets %}
