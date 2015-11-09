@@ -2,7 +2,7 @@ import os
 
 from flask import Flask
 from flask.ext.assets import Environment
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, MetaData
 
 from ouija import default_settings
 
@@ -14,3 +14,5 @@ app.config.from_envvar('OUIJA_SETTINGS', silent=True)
 assets = Environment()
 
 engine = create_engine(app.config.get('DATABASE_URI'))
+metadata = MetaData(bind=engine)
+metadata.reflect(engine)
