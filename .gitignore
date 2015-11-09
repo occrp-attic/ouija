@@ -1,2 +1,6 @@
 *.egg-info
 *.pyc
+ui/.webassets-cache/
+ui/bower_components/
+ui/build/
+
