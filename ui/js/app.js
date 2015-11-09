@@ -7,20 +7,34 @@ ouija.config(['$routeProvider', '$analyticsProvider', '$compileProvider',
   $routeProvider.when('/', {
     templateUrl: 'home.html',
     controller: 'HomeController',
+    resolve: {}
+  });
+
+  $routeProvider.when('/tables/', {
+    templateUrl: 'tables/list.html',
+    controller: 'EntityController',
+    reloadOnSearch: false,
     resolve: {
-      metadata: loadMetadata,
-      summary: loadSummary,
-      collections: loadCollections
+      bind: loadTablesList
     }
   });
+
 
   $routeProvider.when('/tables/:id', {
     templateUrl: 'tables/view.html',
     controller: 'EntityController',
     reloadOnSearch: false,
     resolve: {
-      bind: loadEntityBind,
-      metadata: loadMetadata
+      bind: loadTableBind
+    }
+  });
+
+  $routeProvider.when('/queries/', {
+    templateUrl: 'queries/list.html',
+    controller: 'CollectionController',
+    reloadOnSearch: false,
+    resolve: {
+      collection: loadQueryList,
     }
   });
 
@@ -29,8 +43,7 @@ ouija.config(['$routeProvider', '$analyticsProvider', '$compileProvider',
     controller: 'CollectionController',
     reloadOnSearch: false,
     resolve: {
-      collection: loadCollection,
-      metadata: loadMetadata
+      collection: loadQueryBind,
     }
   });
 
