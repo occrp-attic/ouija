@@ -1,10 +1,10 @@
 from flask import render_template, request, Blueprint
-from apikit import jsonify
+from apikit import jsonify, Pager
 from sqlalchemy import Table
 from werkzeug.exceptions import NotFound
 
 from ouija.core import engine, metadata, url_for
-from ouija.util import angular_templates
+from ouija.util import angular_templates, QueryPager
 
 base_api = Blueprint('base', __name__)
 
@@ -37,6 +37,12 @@ def table_data(table, detailed=True):
     return data
 
 
+def get_table_by_name(name):
+    if name not in metadata.tables.keys():
+        raise NotFound()
+    return Table(name, metadata, autoload=True, autoload_with=engine)
+
+
 @base_api.route('/api/tables')
 def tables_index():
     tables = []
@@ -50,16 +56,17 @@ def tables_index():
 
 @base_api.route('/api/table/<name>')
 def tables_view(name):
-    if name not in metadata.tables.keys():
-        raise NotFound()
-    table = Table(name, metadata, autoload=True, autoload_with=engine)
+    table = get_table_by_name(name)
     return jsonify(table_data(table))
 
 
-@base_api.route('/api/table/<name>/rows')
-def tables_rows(name):
-    return jsonify({
-    })
+@base_api.route('/api/table/<table_name>/rows')
+def tables_rows(table_name):
+    table = get_table_by_name(table_name)
+    from sqlalchemy import select
+    q = select([table], from_obj=table)
+    return jsonify(Pager(QueryPager(engine, q), table_name=table_name,
+                         _external=True))
 
 
 @base_api.route('/')
