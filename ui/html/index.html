@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html ng-app="spindle">
+<head>
+  <meta charset="utf-8">
+  <title>{{config.APP_NAME}}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="google" content="notranslate" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,700,800&subset=latin,greek,vietnamese,latin-ext,cyrillic' rel='stylesheet' type='text/css'>
+
+  {% assets filters="scss,cssmin", output="build/style.css",
+    "bower_components/angular/angular-csp.css",
+    "bower_components/animate.css/animate.css",
+    "style/main.scss"
+  %}
+    <link href='{{ ASSET_URL }}' rel='stylesheet' type='text/css'>
+  {% endassets %}
+
+  <link rel="shortcut icon" href="/static/img/occrp-logo-bg.png">
+</head>
+<body ng-controller="AppController as app">
+  <nav class="navbar navbar-default" id="topnav">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="/#/">
+          <img src="/static/img/occrp-logo-bg.png">
+        </a>
+      </div>
+
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse">
+        <ul class="nav navbar-nav">
+          <li><a href="#/tables">Tables</a></li>
+          <li><a href="#/queries">Queries</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right" ng-cloak>
+          <li ng-show="session.logged_in">
+            <a href="/auth/reset" target="_self">
+              Logout
+            </a>
+          </li>
+          <li ng-hide="session.logged_in">
+            <a href="/auth/authorize" target="_self">
+              Sign in
+            </a>
+          </li>
+        </ul>
+        <p class="navbar-text navbar-right" ng-cloak ng-show="session.logged_in">
+          <i class="fa fa-user"></i>
+          <span ng-bind="session.user.name"></span>
+        </p>
+      </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+  </nav>
+
+  <div id="page">
+    <div id="spinner-overlay" ng-hide="routeLoaded">
+      <div class="spinner" ng-hide="routeFailed">
+        <i class="fa fa-spinner fa-pulse"></i>
+      </div>
+      <div class="spinner failed" ng-cloak ng-show="routeFailed">
+        <i class="fa fa-exclamation-triangle"></i>
+        <div class="failure-note">
+          He's dead, Jim.
+        </div>
+      </div>
+    </div>
+    <div class="container-fluid">
+      <div ng-cloak ng-view autoscroll="true"></div>
+    </div>
+  </div>
+
+  {% include "analytics.html" %}
+
+  {% assets filters="uglifyjs", output="build/deps.js",
+      "bower_components/jquery/dist/jquery.js",
+      "bower_components/moment/moment.js",
+      "bower_components/angular/angular.js",
+      "bower_components/angular-animate/angular-animate.js",
+      "bower_components/angular-route/angular-route.js",
+      "bower_components/angular-bootstrap/ui-bootstrap.js",
+      "bower_components/angular-bootstrap/ui-bootstrap-tpls.js",
+      "bower_components/ngInfiniteScroll/build/ng-infinite-scroll.js",
+      "bower_components/angulartics/src/angulartics.js",
+      "bower_components/angulartics/src/angulartics-piwik.js" %}
+    <script src='{{ ASSET_URL }}'></script>
+  {% endassets %}
+
+  {% assets filters="uglifyjs", output="build/app.js",
+      "js/app.js",
+      "js/services/metadata.js",
+      "js/services/query.js",
+      "js/services/schema.js",
+      "js/services/session.js",
+      "js/directives/permissions_edit.js",
+      "js/directives/bind_value.js",
+      "js/directives/entity_icon.js",
+      "js/directives/entity_table.js",
+      "js/directives/entity_table_column.js",
+      "js/directives/entity_address.js",
+      "js/directives/collection_add.js",
+      "js/directives/search_facet.js",
+      "js/controllers/app.js",
+      "js/controllers/home.js",
+      "js/controllers/search.js",
+      "js/controllers/entities.js",
+      "js/controllers/collections.js",
+      "js/filters.js"
+  %}
+    <script src='{{ ASSET_URL }}'></script>
+  {% endassets %}
+
+  {% for path, tmpl in templates %}
+    <script id="{{path}}" type="text/ng-template">{{ tmpl | safe }}</script>
+  {% endfor %}
+</body>
+</html>
