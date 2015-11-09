@@ -14,3 +14,4 @@
 ### Element actions
 
  * /api/tables/:tablename -- GET details about table
+ * /api/tables/:queryid -- GET query results
