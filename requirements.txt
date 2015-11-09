@@ -1,0 +1,8 @@
+flask
+flask-script
+flask-assets
+flask-testing
+flask-oauthlib
+apikit
+sqlalchemy
+psycopg2
