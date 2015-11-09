@@ -6,3 +6,4 @@ flask-oauthlib
 apikit
 sqlalchemy
 psycopg2
+cssmin

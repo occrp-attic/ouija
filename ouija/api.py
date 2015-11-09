@@ -2,6 +2,7 @@ from flask import render_template, request, Blueprint
 from apikit import jsonify
 
 from ouija.core import engine, metadata
+from ouija.util import angular_templates
 
 # TODO: make notes, bookmarks, links
 
@@ -27,4 +28,4 @@ def tables_index():
 @base_api.route('/')
 def index():
     templates = []  # angular_templates()
-    return render_template('index.html', templates=templates)
+    return render_template('html/index.html', templates=templates)
