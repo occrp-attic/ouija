@@ -8,6 +8,7 @@ from ouija.util import angular_templates
 
 base_api = Blueprint('base', __name__)
 
+
 def table_data(table):
     return {
         'name': table.name
@@ -17,7 +18,7 @@ def table_data(table):
 @base_api.route('/api/tables')
 def tables_index():
     tables = []
-    for table in metadata.tables:
+    for table in metadata.tables.values():
         tables.append(table_data(table))
     return jsonify({
         'tables': tables,
