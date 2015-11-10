@@ -19,12 +19,16 @@ def normalize_column_type(column):
 
 
 def table_data(table, detailed=True):
+    from sqlalchemy import select
+    q = select([table], from_obj=table)
+
     data = {
         'name': table.name,
         'label': table.name,
         'metadata_uri': url_for('base.tables_view', table_name=table.name),
         'rows_uri': url_for('base.tables_rows', table_name=table.name),
-        'columns_num': len(table.columns)
+        'columns_num': len(table.columns),
+        'rows_num': len(QueryPager(engine, q))
     }
     if detailed:
         data['columns'] = []
