@@ -1,54 +1,41 @@
 
-ouija.factory('tablesService', ['$route', '$location', '$q', '$http', '$analytics',
-    function($route, $location, $q, $http, $analytics) {
-  var query = {};
+ouija.service('tablesService', ['$q', '$http', function($q, $http) {
 
-  var ensureArray = function(data) {
-    if (!angular.isDefined(data)) {
-      return [];
-    }
-    return data;
-  };
+    function listTables() {
+        var dfd = $q.defer();
+        var request = $http({
+            method: "get",
+            url: "/api/tables/",
+            params: {},
+            data: {}
+        });
+        request.then( function(response) {
+            dfd.resolve(response.data);
+        }, function(error) {
+            dfd.resolve(error);
+        }) );
+        return dfd.promise;
+    };
 
-  var get = function() {
-    query = {};
-    return query;
-  };
+    function getTable(tablename) {
+        var dfd = $q.defer();
+        var request = $http({
+            method: "post",
+            url: "/api/tables/" + tablename,
+            params: {},
+            data: {}
+        });
+        request.then( function(response) {
+            dfd.resolve(response.data);
+        }, function(error) {
+            dfd.resolve(error);
+        }) );
+        return dfd.promise;
+    };
 
-  var set = function(name, val) {
-    query = get();
-    query[name] = val;
-    $location.path('/tables').search(query);
-  }
-
-  var clear = function() {
-    $location.search({});
-  };
-
-  var execute = function() {
-    var dfd = $q.defer(),
-        query = get();
-
-    $http.get('/api/tables', {}).then(function(res) {
-      dfd.resolve(res.data);
-    }, function(err) {
-      dfd.reject(err);
-    });
-    return dfd.promise;
-  };
-
-  get();
-
-  return {
-      state: query,
-      get: get,
-      set: set,
-      clear: clear,
-      execute: execute,
-  };
+    return {
+        listTables,
+        getTable,
+    };
 
 }]);
-
-var loadTables = ['tablesService', function(tablesService) {
-  return tablesService.get();
-}];

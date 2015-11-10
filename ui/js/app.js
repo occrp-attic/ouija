@@ -14,7 +14,7 @@ ouija.config(['$routeProvider', '$analyticsProvider', '$compileProvider',
     templateUrl: 'tables/list.html',
     controller: 'TableController',
     resolve: {
-      bind: loadTables
+      tables: function(tablesService) { tablesService.listTables() },
     }
   });
 
@@ -22,7 +22,7 @@ ouija.config(['$routeProvider', '$analyticsProvider', '$compileProvider',
     templateUrl: 'tables/view.html',
     controller: 'TableController',
     resolve: {
-      bind: loadTables
+      table: function(tablesService) { tablesService.getTable() },
     }
   });
 
