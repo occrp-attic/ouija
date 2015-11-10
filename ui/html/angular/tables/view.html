@@ -1,0 +1,18 @@
+<h1>Table: {{table.label}}</h1>
+
+<h2>Description</h2>
+
+
+<h2>Sample data</h2>
+<div style="overflow-x: scroll;">
+    <table class="table table-bordered table-striped table-hover table-rounded">
+    <thead>
+        <tr><th ng-repeat="col in table.columns" data-type="{{col.type}}">{{col.label}}</th><tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="row in tabledata.results">
+            <td ng-repeat="col in table.columns">{{row[col.name]}}</td>
+        </tr>
+    </tbody>
+    </table>
+</div>

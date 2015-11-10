@@ -22,8 +22,27 @@ ouija.factory('tablesService', ['$q', '$http', function($q, $http) {
     function getTable(tablename) {
         var dfd = $q.defer();
         var request = $http({
-            method: "post",
+            method: "get",
             url: "/api/table/" + tablename,
+            params: {},
+            data: {}
+        });
+        request.then(
+            function(response) {
+                dfd.resolve(response.data);
+            },
+            function(error) {
+                dfd.resolve(error);
+            }
+        );
+        return dfd.promise;
+    };
+
+    function getTableRows(tablename) {
+        var dfd = $q.defer();
+        var request = $http({
+            method: "get",
+            url: "/api/table/" + tablename + "/rows",
             params: {},
             data: {}
         });
@@ -41,6 +60,7 @@ ouija.factory('tablesService', ['$q', '$http', function($q, $http) {
     return {
         "listTables": listTables,
         "getTable": getTable,
+        "getTableRows": getTableRows,
     };
 
 }]);

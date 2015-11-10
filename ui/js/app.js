@@ -12,7 +12,7 @@ ouija.config(['$routeProvider', '$analyticsProvider', '$compileProvider',
 
   $routeProvider.when('/tables/', {
     templateUrl: 'tables/list.html',
-    controller: 'TableController',
+    controller: 'TablesController',
     resolve: {
       tables: function(tablesService) { return tablesService.listTables() },
     }
@@ -22,7 +22,8 @@ ouija.config(['$routeProvider', '$analyticsProvider', '$compileProvider',
     templateUrl: 'tables/view.html',
     controller: 'TableController',
     resolve: {
-      table: function(tablesService) { tablesService.getTable() },
+      table: ['tablesService', '$route', function(tablesService, $route) { return tablesService.getTable($route.current.params.id) }],
+      data:  ['tablesService', '$route', function(tablesService, $route) { return tablesService.getTableRows($route.current.params.id) }],
     }
   });
 

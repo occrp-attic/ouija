@@ -1,8 +1,9 @@
-<table class="table table-border table-rounded">
+<h1>All tables</h1>
+<table class="table table-bordered table-hover table-rounded">
 <thead>
 <tr><th>Name</th><th>Columns</th><th>Records</th><tr>
 </thead>
 <tbody ng-repeat="result in data.results">
-    <tr><td>{{result.name}}</td><td>{{result.columns_num}}</td><td>{{result.rows_num}}</td></tr>
+    <tr><td><a href="#/tables/{{result.name}}">{{result.label}}</a></td><td>{{result.columns_num}}</td><td>{{result.rows_num}}</td></tr>
 </tbody>
 </table>
