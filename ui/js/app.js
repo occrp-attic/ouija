@@ -14,7 +14,7 @@ ouija.config(['$routeProvider', '$analyticsProvider', '$compileProvider',
     templateUrl: 'tables/list.html',
     controller: 'TableController',
     resolve: {
-      tables: function(tablesService) { tablesService.listTables() },
+      tables: function(tablesService) { return tablesService.listTables() },
     }
   });
 

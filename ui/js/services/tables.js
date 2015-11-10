@@ -1,19 +1,21 @@
 
-ouija.service('tablesService', ['$q', '$http', function($q, $http) {
+ouija.factory('tablesService', ['$q', '$http', function($q, $http) {
 
     function listTables() {
         var dfd = $q.defer();
         var request = $http({
             method: "get",
-            url: "/api/tables/",
+            url: "/api/tables",
             params: {},
             data: {}
         });
-        request.then( function(response) {
-            dfd.resolve(response.data);
-        }, function(error) {
-            dfd.resolve(error);
-        }) );
+        request.then(
+            function(response) {
+                dfd.resolve(response.data);
+            }, function(error) {
+                dfd.resolve(error);
+            }
+        );
         return dfd.promise;
     };
 
@@ -21,21 +23,24 @@ ouija.service('tablesService', ['$q', '$http', function($q, $http) {
         var dfd = $q.defer();
         var request = $http({
             method: "post",
-            url: "/api/tables/" + tablename,
+            url: "/api/table/" + tablename,
             params: {},
             data: {}
         });
-        request.then( function(response) {
-            dfd.resolve(response.data);
-        }, function(error) {
-            dfd.resolve(error);
-        }) );
+        request.then(
+            function(response) {
+                dfd.resolve(response.data);
+            },
+            function(error) {
+                dfd.resolve(error);
+            }
+        );
         return dfd.promise;
     };
 
     return {
-        listTables,
-        getTable,
+        "listTables": listTables,
+        "getTable": getTable,
     };
 
 }]);
