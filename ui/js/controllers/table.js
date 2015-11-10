@@ -1,9 +1,8 @@
 
-ouija.controller('TableController', ['$scope', '$http', 'bind', 'metadata',
-  function($scope, $http, bind, metadata) {
+ouija.controller('TableController', ['$scope', '$http', 'tables',
+  function($scope, $http, tables) {
 
-  $scope.bind = bind;
-  $scope.data = bind.data;
-  $scope.metadata = metadata;
+    $scope.bind = tables;
+    $scope.data = tables.data;
 
 }]);
