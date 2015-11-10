@@ -22,8 +22,8 @@ def table_data(table, detailed=True):
     data = {
         'name': table.name,
         'label': table.name,
-        'metadata_uri': url_for('base.tables_view', name=table.name),
-        'rows_uri': url_for('base.tables_rows', name=table.name),
+        'metadata_uri': url_for('base.tables_view', table_name=table.name),
+        'rows_uri': url_for('base.tables_rows', table_name=table.name),
         'columns_num': len(table.columns)
     }
     if detailed:
@@ -54,9 +54,9 @@ def tables_index():
     })
 
 
-@base_api.route('/api/table/<name>')
-def tables_view(name):
-    table = get_table_by_name(name)
+@base_api.route('/api/table/<table_name>')
+def tables_view(table_name):
+    table = get_table_by_name(table_name)
     return jsonify(table_data(table))
 
 
