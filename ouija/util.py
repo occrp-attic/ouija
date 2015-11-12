@@ -6,7 +6,7 @@ from flask import current_app
 
 
 def angular_templates():
-    partials_dir = os.path.join(current_app.static_folder, 'html', 'angular')
+    partials_dir = os.path.join(current_app.static_folder, 'html')
     for (root, dirs, files) in os.walk(partials_dir):
         for file_name in files:
             file_path = os.path.join(root, file_name)

@@ -76,4 +76,4 @@ def tables_rows(table_name):
 @base_api.route('/')
 def index():
     templates = angular_templates()
-    return render_template('html/index.html', templates=templates)
+    return render_template('index.html', templates=templates)

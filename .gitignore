@@ -1,6 +1,6 @@
 *.egg-info
 *.pyc
-ui/.webassets-cache/
-ui/bower_components/
-ui/build/
+ouija/static/.webassets-cache/
+ouija/static/bower_components/
+ouija/static/build/
 
