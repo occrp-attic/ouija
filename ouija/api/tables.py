@@ -1,12 +1,12 @@
-from flask import render_template, request, Blueprint
+from flask import Blueprint
 from apikit import jsonify, Pager
 from sqlalchemy import Table
 from werkzeug.exceptions import NotFound
 
 from ouija.core import engine, metadata, url_for
-from ouija.util import angular_templates, QueryPager
+from ouija.util import QueryPager
 
-base_api = Blueprint('base', __name__)
+tables_api = Blueprint('tables', __name__)
 
 
 def normalize_column_type(column):
@@ -25,10 +25,10 @@ def table_data(table, detailed=True):
     data = {
         'name': table.name,
         'label': table.name,
-        'metadata_uri': url_for('base.tables_view', table_name=table.name),
-        'rows_uri': url_for('base.tables_rows', table_name=table.name),
+        'metadata_uri': url_for('tables.view', table_name=table.name),
+        'rows_uri': url_for('tables.rows', table_name=table.name),
         'columns_num': len(table.columns),
-        'rows_num': len(QueryPager(engine, q))
+        'rows_num': 0  # len(QueryPager(engine, q))
     }
     if detailed:
         data['columns'] = []
@@ -47,8 +47,8 @@ def get_table_by_name(name):
     return Table(name, metadata, autoload=True, autoload_with=engine)
 
 
-@base_api.route('/api/tables')
-def tables_index():
+@tables_api.route('/api/tables')
+def index():
     tables = []
     for table in metadata.tables.values():
         tables.append(table_data(table, detailed=False))
@@ -58,22 +58,16 @@ def tables_index():
     })
 
 
-@base_api.route('/api/table/<table_name>')
-def tables_view(table_name):
+@tables_api.route('/api/table/<table_name>')
+def view(table_name):
     table = get_table_by_name(table_name)
     return jsonify(table_data(table))
 
 
-@base_api.route('/api/table/<table_name>/rows')
-def tables_rows(table_name):
+@tables_api.route('/api/table/<table_name>/rows')
+def rows(table_name):
     table = get_table_by_name(table_name)
     from sqlalchemy import select
     q = select([table], from_obj=table)
     return jsonify(Pager(QueryPager(engine, q), table_name=table_name,
                          _external=True))
-
-
-@base_api.route('/')
-def index():
-    templates = angular_templates()
-    return render_template('index.html', templates=templates)
