@@ -3,7 +3,7 @@
 <!-- h2>Description</h2>
 <h2>Sample data</h2-->
 
-<div style="overflow-x: scroll;">
+<div class="data-table">
     <table class="table table-bordered table-striped table-hover table-rounded">
     <thead>
         <tr>
@@ -14,7 +14,7 @@
     </thead>
     <tbody>
         <tr ng-repeat="row in tabledata.results">
-            <td ng-repeat="col in table.columns">{{row[col.name]}}</td>
+            <td ng-repeat="col in table.columns" class="cell-{{col.type}}" ng-class="{'numeric': col.numeric}">{{row[col.name]}}</td>
         </tr>
     </tbody>
     </table>

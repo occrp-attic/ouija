@@ -39,6 +39,10 @@ class OuijaTable(object):
         return self.database.config.get('tables', {}).get(self.name, {})
 
     @property
+    def label(self):
+        return self.config.get('label', self.name)
+
+    @property
     def columns(self):
         if not hasattr(self, '_columns'):
             self._columns = []
@@ -49,7 +53,7 @@ class OuijaTable(object):
     def to_dict(self):
         return {
             'name': self.name,
-            'label': self.name,
+            'label': self.label,
             'metadata_uri': url_for('tables.view', table_name=self.name),
             'rows_uri': url_for('tables.rows', table_name=self.name),
             'columns_num': len(self.columns),
@@ -80,5 +84,6 @@ class OuijaColumn(object):
         return {
             'name': self.name,
             'label': self.name,
-            'type': self.type
+            'type': self.type,
+            'numeric': self.type in ['integer', 'float']
         }

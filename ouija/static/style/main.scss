@@ -44,10 +44,6 @@ body, html {
     background-color: $gray-subtle;
 }
 
-td.numeric {
-    text-align: right;
-}
-
 @import "table";
 @import "spinner";
 @import "nav";
