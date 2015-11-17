@@ -6,7 +6,11 @@
 <div style="overflow-x: scroll;">
     <table class="table table-bordered table-striped table-hover table-rounded">
     <thead>
-        <tr><th ng-repeat="col in table.columns" data-type="{{col.type}}">{{col.label}}</th><tr>
+        <tr>
+            <th ng-repeat="col in table.columns" data-type="{{col.type}}">
+                {{col.label}}
+            </th>
+        </tr>
     </thead>
     <tbody>
         <tr ng-repeat="row in tabledata.results">

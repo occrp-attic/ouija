@@ -1,55 +1,34 @@
-var ouija = angular.module('ouija', ['ngRoute', 'ngAnimate',
-  'ui.bootstrap', 'angulartics', 'angulartics.piwik', 'infinite-scroll']);
+var ouija = angular.module('ouija', ['ngRoute', 'ngAnimate', 'ui.bootstrap', 'infinite-scroll']);
 
-ouija.config(['$routeProvider', '$analyticsProvider', '$compileProvider',
-    function($routeProvider, $analyticsProvider, $compileProvider) {
+ouija.config(['$routeProvider', '$compileProvider',
+    function($routeProvider, $compileProvider) {
 
   $routeProvider.when('/', {
-    templateUrl: 'home.html',
-    controller: 'HomeController',
-    resolve: {}
-  });
-
-  $routeProvider.when('/tables/', {
-    templateUrl: 'tables/list.html',
-    controller: 'TablesController',
+    templateUrl: 'tables/index.html',
+    controller: 'TableIndexController',
     resolve: {
-      tables: function(tablesService) { return tablesService.listTables() },
+      tables: function(tablesService) {
+        return tablesService.listTables()
+      }
     }
   });
 
   $routeProvider.when('/tables/:id', {
     templateUrl: 'tables/view.html',
-    controller: 'TableController',
+    controller: 'TableViewController',
     resolve: {
-      table: ['tablesService', '$route', function(tablesService, $route) { return tablesService.getTable($route.current.params.id) }],
-      data:  ['tablesService', '$route', function(tablesService, $route) { return tablesService.getTableRows($route.current.params.id) }],
+      table: ['tablesService', '$route', function(tablesService, $route) {
+        return tablesService.getTable($route.current.params.id)
+      }],
+      data:  ['tablesService', '$route', function(tablesService, $route) {
+        return tablesService.getTableRows($route.current.params.id)
+      }]
     }
   });
 
-/*
-  $routeProvider.when('/queries/', {
-    templateUrl: 'queries/list.html',
-    controller: 'QueryController',
-    reloadOnSearch: false,
-    resolve: {
-      collection: loadQueryList,
-    }
-  });
+  // $routeProvider.otherwise({
+  //   redirectTo: '/'
+  // });
 
-  $routeProvider.when('/queries/:id', {
-    templateUrl: 'queries/view.html',
-    controller: 'QueryController',
-    reloadOnSearch: false,
-    resolve: {
-      collection: loadQueryBind,
-    }
-  });
-*/
-
-  $routeProvider.otherwise({
-    redirectTo: '/'
-  });
-
-  $compileProvider.debugInfoEnabled(false);
+  // $compileProvider.debugInfoEnabled(false);
 }]);

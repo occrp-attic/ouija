@@ -19,20 +19,15 @@
   <link rel="shortcut icon" href="/static/img/occrp-logo-bg.png">
 </head>
 <body ng-controller="AppController as app">
-  <nav class="navbar navbar-default" id="topnav">
-    <div class="container-fluid">
+  <nav class="navbar navbar-default navbar-fixed-top" id="topnav">
+    <div class="container">
       <div class="navbar-header">
         <a class="navbar-brand" href="/#/">
           <img src="/static/img/occrp-logo-bg.png">
         </a>
       </div>
 
-      <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse">
-        <ul class="nav navbar-nav">
-          <li><a href="#/tables">Tables</a></li>
-          <li><a href="#/queries">Queries</a></li>
-        </ul>
         <ul class="nav navbar-nav navbar-right" ng-cloak>
           <li ng-show="session.logged_in">
             <a href="/auth/reset" target="_self">
@@ -65,10 +60,29 @@
         </div>
       </div>
     </div>
-    <div class="container-fluid">
+    <div id="view" class="container">
       <div ng-cloak ng-view autoscroll="true"></div>
     </div>
   </div>
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <p>Organized Crime and Corruption Reporting Project</p>
+          <p>
+            Send any suggestions and feedback to
+            <a href="mailto:tech@occrp.org">tech@occrp.org</a>.
+          </p>
+        </div>
+        <div class="col-md-6">
+          <p class="pull-right">
+            <i class="fa fa-github-square"></i>
+            <a href="https://github.com/occrp/ouija">source code</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </footer>
 
   {% assets filters="uglifyjs", output="build/deps.js",
       "bower_components/jquery/dist/jquery.js",
@@ -78,9 +92,7 @@
       "bower_components/angular-route/angular-route.js",
       "bower_components/angular-bootstrap/ui-bootstrap.js",
       "bower_components/angular-bootstrap/ui-bootstrap-tpls.js",
-      "bower_components/ngInfiniteScroll/build/ng-infinite-scroll.js",
-      "bower_components/angulartics/src/angulartics.js",
-      "bower_components/angulartics/src/angulartics-piwik.js" %}
+      "bower_components/ngInfiniteScroll/build/ng-infinite-scroll.js" %}
     <script src='{{ ASSET_URL }}'></script>
   {% endassets %}
 
@@ -89,7 +101,6 @@
       "js/services/tables.js",
       "js/services/session.js",
       "js/controllers/app.js",
-      "js/controllers/home.js",
       "js/controllers/table.js"
   %}
     <script src='{{ ASSET_URL }}'></script>

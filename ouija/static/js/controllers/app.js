@@ -9,13 +9,10 @@ ouija.controller('AppController', ['$scope', '$rootScope', '$http', '$location',
     $rootScope.$on("$routeChangeStart", function (event, next, current) {
         $scope.routeLoaded = false;
         $scope.routeFailed = false;
-        $scope.routeLoadTime = new Date();
     });
 
     $rootScope.$on("$routeChangeSuccess", function (event, next, current) {
         $scope.routeLoaded = true;
-        var loadTime = new Date() - $scope.routeLoadTime;
-        console.log('Loaded route, took:', loadTime, 'ms');
     });
 
     $rootScope.$on("$routeChangeError", function (event, next, current) {

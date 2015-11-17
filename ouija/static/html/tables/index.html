@@ -1,0 +1,22 @@
+<h1>All tables</h1>
+
+<table class="table table-bordered table-hover table-rounded">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Columns</th>
+      <th>Records</th>
+    </tr>
+  </thead>
+  <tr ng-repeat="result in data.results">
+    <td>
+      <a href="#/tables/{{result.name}}">{{result.label}}</a>
+    </td>
+    <td>
+      {{result.columns_num}}
+    </td>
+    <td>
+      {{result.rows_num}}
+    </td>
+  </tr>
+</table>
