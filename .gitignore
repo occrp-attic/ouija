@@ -3,4 +3,5 @@
 ouija/static/.webassets-cache/
 ouija/static/bower_components/
 ouija/static/build/
-
+.env
+settings.py
