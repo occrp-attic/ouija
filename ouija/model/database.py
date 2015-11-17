@@ -43,6 +43,10 @@ class OuijaTable(object):
         return self.config.get('label', self.name)
 
     @property
+    def roles(self):
+        return set(self.config.get('roles', []))
+
+    @property
     def columns(self):
         if not hasattr(self, '_columns'):
             self._columns = []
@@ -77,13 +81,17 @@ class OuijaColumn(object):
         return self.table.config.get('columns', {}).get(self.name, {})
 
     @property
+    def label(self):
+        return self.config.get('label', self.name)
+
+    @property
     def type(self):
         return normalize_column_type(self.column)
 
     def to_dict(self):
         return {
             'name': self.name,
-            'label': self.name,
+            'label': self.label,
             'type': self.type,
             'numeric': self.type in ['integer', 'float']
         }

@@ -17,7 +17,7 @@ def get_oauth_token():
 
 @auth_api.before_app_request
 def load_user():
-    request.auth_roles = session.get('roles', [authz.GUEST])
+    request.auth_roles = set(session.get('roles', [authz.GUEST]))
     request.auth_user = session.get('user')
     request.auth_admin = False
     request.logged_in = request.auth_user is not None

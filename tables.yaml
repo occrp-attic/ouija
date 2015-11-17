@@ -1,4 +1,7 @@
 
 tables:
-    
-
+    ba_rgurs_owner:
+        label: "Republika Srpska Property Owners"
+        roles:
+            - friedrich.lindenberg@gmail.com         
+            - guest
