@@ -15,10 +15,12 @@ class OuijaDatabase(object):
             self._tables = []
             for table in self.meta.tables.values():
                 table = OuijaTable(self, table)
+                if table.hidden:
+                    continue
                 self._tables.append(table)
         return self._tables
 
-    def by_name(self, table_name):
+    def get(self, table_name):
         for table in self.tables:
             if table.name == table_name:
                 return table
@@ -26,8 +28,8 @@ class OuijaDatabase(object):
 
 class OuijaTable(object):
 
-    def __init__(self, database, table):
-        self.database = database
+    def __init__(self, db, table):
+        self.db = db
         self.table = table
 
     @property
@@ -36,11 +38,15 @@ class OuijaTable(object):
 
     @property
     def config(self):
-        return self.database.config.get('tables', {}).get(self.name, {})
+        return self.db.config.get('tables', {}).get(self.name, {})
 
     @property
     def label(self):
         return self.config.get('label', self.name)
+
+    @property
+    def hidden(self):
+        return self.config.get('hidden', False)
 
     @property
     def roles(self):
@@ -51,8 +57,16 @@ class OuijaTable(object):
         if not hasattr(self, '_columns'):
             self._columns = []
             for column in self.table.columns:
-                self._columns.append(OuijaColumn(self, column))
+                ouija_column = OuijaColumn(self, column)
+                if ouija_column.hidden:
+                    continue
+                self._columns.append(ouija_column)
         return self._columns
+
+    def get(self, column_name):
+        for column in self.columns:
+            if column.name == column_name:
+                return column
 
     def to_dict(self):
         return {
@@ -79,6 +93,10 @@ class OuijaColumn(object):
     @property
     def config(self):
         return self.table.config.get('columns', {}).get(self.name, {})
+
+    @property
+    def hidden(self):
+        return self.config.get('hidden', False)
 
     @property
     def label(self):

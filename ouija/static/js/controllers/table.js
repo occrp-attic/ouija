@@ -9,4 +9,8 @@ ouija.controller('TableViewController', ['$scope', '$http', 'table', 'data',
   function($scope, $http, table, data) {
     $scope.table = table;
     $scope.tabledata = data;
+
+    $scope.loadMore = function() {
+      console.log('huhu!');
+    }
 }]);

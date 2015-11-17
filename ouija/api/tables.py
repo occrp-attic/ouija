@@ -3,8 +3,7 @@ from apikit import jsonify, Pager
 from werkzeug.exceptions import NotFound
 
 from ouija import authz
-from ouija.model import db
-from ouija.util import QueryPager
+from ouija.model import db, OuijaQuery
 
 tables_api = Blueprint('tables', __name__)
 
@@ -20,7 +19,7 @@ def index():
 
 @tables_api.route('/api/table/<table_name>')
 def view(table_name):
-    table = db.by_name(table_name)
+    table = db.get(table_name)
     if table is None:
         raise NotFound()
     authz.require(authz.table(table))
@@ -29,12 +28,11 @@ def view(table_name):
 
 @tables_api.route('/api/table/<table_name>/rows')
 def rows(table_name):
-    table = db.by_name(table_name)
+    table = db.get(table_name)
     if table is None:
         raise NotFound()
     authz.require(authz.table(table))
-    from sqlalchemy import select
-    q = select([table.table], from_obj=table.table)
-    return jsonify(Pager(QueryPager(table.database.engine, q),
-                         table_name=table_name,
-                         _external=True))
+    q = OuijaQuery(db, {
+        'columns': [{'table': table_name}]
+    })
+    return jsonify(Pager(q, table_name=table_name, _external=True))

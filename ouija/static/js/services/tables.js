@@ -43,7 +43,7 @@ ouija.factory('tablesService', ['$q', '$http', function($q, $http) {
         var request = $http({
             method: "get",
             url: "/api/table/" + tablename + "/rows",
-            params: {},
+            params: {limit: 100},
             data: {}
         });
         request.then(
