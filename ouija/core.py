@@ -3,7 +3,6 @@ import os
 from flask import Flask, url_for as _url_for
 from flask.ext.assets import Environment
 from flask_oauthlib.client import OAuth
-from sqlalchemy import create_engine, MetaData
 
 from ouija import default_settings
 
@@ -15,10 +14,6 @@ app.config.from_envvar('OUIJA_SETTINGS', silent=True)
 assets = Environment(app)
 oauth = OAuth()
 oauth_provider = oauth.remote_app('provider', app_key='OAUTH')
-
-engine = create_engine(app.config.get('DATABASE_URI'))
-metadata = MetaData(bind=engine)
-metadata.reflect(engine)
 
 
 def url_for(*a, **kw):

@@ -7,3 +7,4 @@ apikit
 sqlalchemy
 psycopg2
 cssmin
+pyyaml
