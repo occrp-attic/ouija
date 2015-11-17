@@ -1,6 +1,6 @@
 <h2>Table: {{table.label}}</h2>
 
-<div class="data-table" infinite-scroll="loadMore()" infinite-scroll-distance="1">
+<div class="data-table" infinite-scroll="loadMore()" infinite-scroll-distance="3">
     <table class="table table-bordered table-striped table-hover table-rounded">
     <thead>
         <tr>
@@ -10,8 +10,10 @@
         </tr>
     </thead>
     <tbody>
-        <tr ng-repeat="row in tabledata.results">
-            <td ng-repeat="col in table.columns" class="cell-{{col.type}}" ng-class="{'numeric': col.numeric}">{{row[col.name]}}</td>
+        <tr ng-repeat="row in data.results">
+            <td ng-repeat="col in table.columns" class="cell-{{col.type}}" ng-class="{'numeric': col.numeric}">
+                {{row[col.name]}}
+            </td>
         </tr>
     </tbody>
     </table>

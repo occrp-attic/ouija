@@ -8,9 +8,18 @@ ouija.controller('TableIndexController', ['$scope', '$http', 'tables',
 ouija.controller('TableViewController', ['$scope', '$http', 'table', 'data',
   function($scope, $http, table, data) {
     $scope.table = table;
-    $scope.tabledata = data;
+    $scope.data = data;
+    $scope.moreLoading = false;
 
     $scope.loadMore = function() {
-      console.log('huhu!');
+      if (!$scope.data.next_url || $scope.moreLoading) {
+        return;
+      }
+      $scope.moreLoading = true;
+      $http.get($scope.data.next_url).then(function(res) {
+        $scope.data.results = $scope.data.results.concat(res.data.results);
+        $scope.data.next_url = res.data.next_url;
+        $scope.moreLoading = false;
+      });
     }
 }]);
