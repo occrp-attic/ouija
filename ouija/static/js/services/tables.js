@@ -58,9 +58,9 @@ ouija.factory('tablesService', ['$q', '$http', function($q, $http) {
     };
 
     return {
-        "listTables": listTables,
-        "getTable": getTable,
-        "getTableRows": getTableRows,
+        listTables: listTables,
+        getTable: getTable,
+        getTableRows: getTableRows,
     };
 
 }]);
