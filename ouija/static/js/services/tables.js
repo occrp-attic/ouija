@@ -23,7 +23,7 @@ ouija.factory('tablesService', ['$q', '$http', function($q, $http) {
         var dfd = $q.defer();
         var request = $http({
             method: "get",
-            url: "/api/table/" + tablename,
+            url: "/api/tables/" + tablename,
             params: {},
             data: {}
         });
@@ -42,7 +42,7 @@ ouija.factory('tablesService', ['$q', '$http', function($q, $http) {
         var dfd = $q.defer();
         var request = $http({
             method: "get",
-            url: "/api/table/" + tablename + "/rows",
+            url: "/api/tables/" + tablename + "/rows",
             params: {limit: 100},
             data: {}
         });

@@ -17,7 +17,7 @@ def index():
     })
 
 
-@tables_api.route('/api/table/<table_name>')
+@tables_api.route('/api/tables/<table_name>')
 def view(table_name):
     table = db.get(table_name)
     if table is None:
@@ -26,7 +26,7 @@ def view(table_name):
     return jsonify(table)
 
 
-@tables_api.route('/api/table/<table_name>/rows')
+@tables_api.route('/api/tables/<table_name>/rows')
 def rows(table_name):
     table = db.get(table_name)
     if table is None:

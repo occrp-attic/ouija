@@ -9,6 +9,12 @@ td.numeric {
 .data-table {
     overflow-x: scroll;
 
+    th {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
     td {
         min-width: 150px;
         max-width: 350px;

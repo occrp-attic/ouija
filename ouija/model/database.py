@@ -37,8 +37,14 @@ class OuijaTable(object):
         return self.table.name
 
     @property
+    def default_config(self):
+        return self.db.config.get('defaults', {})
+
+    @property
     def config(self):
-        return self.db.config.get('tables', {}).get(self.name, {})
+        config = dict(self.default_config)
+        config.update(self.db.config.get('tables', {}).get(self.name, {}))
+        return config
 
     @property
     def label(self):
@@ -92,7 +98,10 @@ class OuijaColumn(object):
 
     @property
     def config(self):
-        return self.table.config.get('columns', {}).get(self.name, {})
+        defaults = self.table.default_config.get('columns', {})
+        config = dict(defaults.get(self.name, {}))
+        config.update(self.table.config.get('columns', {}).get(self.name, {}))
+        return config
 
     @property
     def hidden(self):

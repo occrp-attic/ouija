@@ -1,7 +1,33 @@
 
+defaults:
+    roles:
+        - user
+    columns:
+        id:
+            label: ID
+        source_file:
+            hidden: true
+        xml_version_1_0_encoding_utf_8:
+            hidden: true
+        country_code:
+            label: Country Code
+        cik:
+            label: SEC Central Index Key
+        cw_id:
+            label: CorpWatch ID
+        year:
+            label: Year
+
 tables:
     ba_rgurs_owner:
         label: "Republika Srpska Property Owners"
         roles:
             - friedrich.lindenberg@gmail.com         
             - guest
+
+    ba_katastar_deed:
+        columns:
+            raw:
+                hidden: true
+            url:
+                label: URL
